@@ -1,0 +1,105 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BASE */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffffff;
+
+  background-image: radial-gradient(#bfbfbf 1px, transparent 1px);
+  background-size: 18px 18px;
+
+  color: #1c2b2d;
+}
+
+/* NAVBAR */
+.navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 30px 80px;
+}
+
+/* centraliza o menu de verdade */
+.nav-links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  gap: 50px;
+
+  background: #eaeaea;
+  padding: 16px 40px;
+  border-radius: 50px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #1c2b2d;
+  font-size: 18px;
+  font-weight: 500;
+  position: relative;
+}
+
+/* LINK ATIVO */
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 5px;
+  background: #2f6f73;
+  border-radius: 10px;
+}
+
+/* BOTÃO */
+.btn-contato {
+  background: #1c4d52;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* HERO */
+.hero {
+  height: 80vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding-top: 120px;
+}
+
+/* LOGO CENTRAL */
+.hero-logo {
+  width: 800px;
+  margin-bottom: 20px;
+}
+
+/* LOGO NO CANTO SUPERIOR ESQUERDO */
+.empe-logo {
+  height: 90px;
+  width: auto;
+}
+
+/* TEXTO */
+.hero p {
+  font-size: 20px;
+  max-width: 600px;
+  opacity: 0.75;
+}
