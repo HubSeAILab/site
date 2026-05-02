@@ -1,3 +1,9 @@
+/*O que ainda preciso fazer: 
+- Hover nos botões de parceria que levam para os outros sites
+- Texto do SOBRE ficar mais largo
+*/
+
+
 /* ================= RESET ================= */
 * {
   margin: 0;
@@ -177,6 +183,7 @@ body {
 .sobre-texto {
   max-width: 400px;
   line-height: 1.6;
+  max-height: 200px;
 }
 
 /* divisor */
@@ -202,4 +209,87 @@ body {
   border: 2px solid #1c4d52;
   padding: 10px 20px;
   border-radius: 30px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.main-content {
+  padding-top: 200px;
+}
+
+.navbar {
+  position: relative; /* ou fixed, se quiser */
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 30px 80px;
+
+  width: 100%;
+}
+
+#navsobre {
+  padding-top: 77px;
+}
+
+/* TEXTO */
+.sobre-texto {
+  font-size: 20px;
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+/* TÍTULO */
+.sobre h1 {
+  font-size: 36px;
+}
+
+/* PARCERIAS (botões) */
+.parcerias-lista span {
+  font-size: 16px;
+  padding: 10px 22px;
+}
+
+main {
+  min-height: calc(100vh - 120px); /* altura da tela - altura do footer */
+  padding-bottom: 100px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 80px;
+
+  background: #0f3d3f;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sobre-parcerias {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.sobre-parcerias h3 {
+  margin-top: 0;
+}
+
+.sobre-content {
+  display: grid;
+  grid-template-columns: 450px auto 400px;
+  align-items: start;
+  gap: 30px;
+
+  justify-content: center;
 }
