@@ -1,6 +1,10 @@
 /*O que ainda preciso fazer: 
 - Hover nos botões de parceria que levam para os outros sites
 - Texto do SOBRE ficar mais largo
+- Footer com efeito tecnológico
+- Adicionar o botão de contato na pag SOBRE
+- Colocar a descrição e parcerias
+- Fazer versão pra celular
 */
 
 
@@ -292,4 +296,72 @@ footer {
   gap: 30px;
 
   justify-content: center;
+}
+
+/* ===== PROJETOS ===== */
+
+.projetos {
+  padding: 60px 80px;
+}
+
+/* GRID */
+.projetos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+/* CARD */
+.card-projeto {
+  background: #d9d9d9;
+  border-radius: 20px;
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* TÍTULO */
+.card-projeto h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #1c2b2d;
+}
+
+/* IMAGEM (placeholder por enquanto) */
+.card-img {
+  width: 100%;
+  height: 180px;
+  background: #bfbfbf;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* BOTÃO */
+.btn-card {
+  background: #1c4d52;
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+/* HOVER */
+.btn-card:hover {
+  background: #163c40;
+}
+
+/* reduz o espaço acima dos cards */
+.projetos {
+  padding-top: 70px;   /* antes estava 60px */
+}
+
+.main-content {
+  padding-top: 0px;
 }
