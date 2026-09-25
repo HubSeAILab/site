@@ -1,37 +1,32 @@
-name: Deploy do Site
+name: Deploy
 
 on:
   push:
-    branches: ["master", "main"]
-  workflow_dispatch:
+    branches: [main]
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   deploy:
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout do código
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Configurar GitHub Pages
-        uses: actions/configure-pages@v4
+      - name: Copiar dados para front
+        run: |
+          mkdir -p front/schemas
+          cp schemas/publication-final.schema.json front/schemas/publication-final.schema.json
 
-      - name: Upload dos arquivos do Frontend
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
         with:
-          path: './front' # Aponta para a pasta onde está o frontend
+          path: './front'
 
-      - name: Deploy no GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v4
