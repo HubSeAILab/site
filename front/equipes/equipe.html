@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equipe - HUB-SE</title>
+<link rel="stylesheet" href="equipe.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo-hubse">
+      <div class="logo-icone">H</div>
+      <div class="logo-texto">HUB<br>-SE</div>
+    </div>
+
+    <div class="nav-links">
+      <a href="../index.html">Início</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="../projetos/projetos.html">Projetos</a>
+      <a href="equipe.html" class="active">Equipe</a>
+    </div>
+
+    <button class="btn-contato">Contato</button>
+  </nav>
+
+  <main class="equipe" id="equipe-container">
+    <!-- os grupos e cards são inseridos aqui via JavaScript -->
+  </main>
+
+  <script>
+    async function carregarEquipe() {
+      const container = document.getElementById('equipe-container');
+
+      try {
+        const resposta = await fetch('equipe.json');
+        const membros = await resposta.json();
+
+        // agrupa os membros pelo campo PROJETO, mantendo a ordem de chegada
+        const grupos = {};
+        membros.forEach(membro => {
+          if (!grupos[membro.PROJETO]) {
+            grupos[membro.PROJETO] = [];
+          }
+          grupos[membro.PROJETO].push(membro);
+        });
+
+        Object.entries(grupos).forEach(([nomeGrupo, membrosDoGrupo]) => {
+          const secao = document.createElement('section');
+          secao.className = 'equipe-grupo';
+
+          const titulo = document.createElement('h2');
+          titulo.textContent = nomeGrupo;
+          secao.appendChild(titulo);
+
+          const grid = document.createElement('div');
+          grid.className = 'equipe-grid';
+
+          membrosDoGrupo.forEach(membro => {
+            grid.appendChild(criarCardMembro(membro));
+          });
+
+          secao.appendChild(grid);
+          container.appendChild(secao);
+        });
+
+      } catch (erro) {
+        container.innerHTML = '<p>Não foi possível carregar os dados da equipe.</p>';
+        console.error('Erro ao carregar equipe.json:', erro);
+      }
+    }
+
+    function criarCardMembro(membro) {
+      const card = document.createElement('div');
+      card.className = 'membro';
+
+      card.innerHTML = `
+        <img class="membro-foto" src="${membro.URL_FOTO}" alt="${membro.NOME} ${membro.SOBRENOME}">
+        <div class="membro-nome">${membro.NOME} ${membro.SOBRENOME}</div>
+        <div class="membro-links">
+          <a href="${membro.LINKEDIN}" target="_blank" rel="noopener">
+            <span class="icone-rede icone-linkedin">in</span> linkedin
+          </a>
+          <a href="${membro.GITHUB}" target="_blank" rel="noopener">
+            <span class="icone-rede icone-github">gh</span> github
+          </a>
+        </div>
+      `;
+
+      return card;
+    }
+
+    carregarEquipe();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,473 @@
+/*O que ainda preciso fazer: 
+- Hover nos botões de parceria que levam para os outros sites
+- Texto do SOBRE ficar mais largo
+- Footer com efeito tecnológico
+- Adicionar o botão de contato na pag SOBRE
+- Colocar a descrição e parcerias
+- Fazer versão pra celular
+*/
+
+
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================= BASE ================= */
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffffff;
+  color: #1c2b2d;
+
+  /* grid de fundo */
+  background-image: radial-gradient(#bfbfbf 1px, transparent 1px);
+  background-size: 18px 18px;
+
+  /* layout para footer fixo no final */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 80px;
+}
+
+/* menu central */
+.nav-links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  gap: 50px;
+
+  background: #eaeaea;
+  padding: 16px 40px;
+  border-radius: 50px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #1c2b2d;
+  font-size: 18px;
+  font-weight: 500;
+  position: relative;
+}
+
+/* link ativo */
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 5px;
+  background: #2f6f73;
+  border-radius: 10px;
+}
+
+/* botão */
+.btn-contato {
+  background: #1c4d52;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ================= HERO ================= */
+.hero {
+  height: 80vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding-top: 120px;
+}
+
+/* logo principal */
+.hero-logo {
+  width: 800px;
+  margin-bottom: 20px;
+}
+
+/* logo topo */
+.empe-logo {
+  height: 90px;
+  width: auto;
+}
+
+/* texto */
+.hero p {
+  font-size: 20px;
+  max-width: 600px;
+  opacity: 0.75;
+}
+
+/* ================= FOOTER ================= */
+.footer {
+  margin-top: auto;
+  width: 100%;
+
+  background: #0d3b44;
+  color: white;
+
+  padding: 60px 20px;
+  text-align: center;
+
+  /* efeito tech */
+  background-image: url("img/circuit.png");
+  background-size: cover;
+  background-position: center;
+
+  border-radius: 0;
+}
+
+.footer-content {
+  position: relative;
+  z-index: 2;
+}
+
+.footer {
+  padding: 40px 20px;
+}
+
+.sobre {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* CENTRALIZA NA TELA */
+
+  padding: 40px 80px;
+}
+
+/* cabeçalho */
+.sobre-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sobre-header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.sobre-logo {
+  height: 100px;
+}
+
+/* layout das colunas */
+.sobre-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+/* texto */
+.sobre-texto {
+  max-width: 400px;
+  line-height: 1.6;
+  max-height: 200px;
+}
+
+/* divisor */
+.divisor {
+  width: 3px;
+  height: 200px;
+  background: #1c4d52;
+  border-radius: 10px;
+}
+
+/* parcerias */
+.sobre-parcerias h3 {
+  margin-bottom: 15px;
+}
+
+.parcerias-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.parcerias-lista span {
+  border: 2px solid #1c4d52;
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.main-content {
+  padding-top: 200px;
+}
+
+.navbar {
+  position: relative; /* ou fixed, se quiser */
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 30px 80px;
+
+  width: 100%;
+}
+
+#navsobre {
+  padding-top: 77px;
+}
+
+/* TEXTO */
+.sobre-texto {
+  font-size: 20px;
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+/* TÍTULO */
+.sobre h1 {
+  font-size: 36px;
+}
+
+/* PARCERIAS (botões) */
+.parcerias-lista span {
+  font-size: 16px;
+  padding: 10px 22px;
+}
+
+main {
+  min-height: calc(100vh - 120px); /* altura da tela - altura do footer */
+  padding-bottom: 100px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 80px;
+
+  background: #0f3d3f;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sobre-parcerias {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.sobre-parcerias h3 {
+  margin-top: 0;
+}
+
+.sobre-content {
+  display: grid;
+  grid-template-columns: 450px auto 400px;
+  align-items: start;
+  gap: 30px;
+
+  justify-content: center;
+}
+
+/* ===== PROJETOS ===== */
+
+.projetos {
+  padding: 60px 80px;
+}
+
+/* GRID */
+.projetos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+/* CARD */
+.card-projeto {
+  background: #d9d9d9;
+  border-radius: 20px;
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* TÍTULO */
+.card-projeto h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #1c2b2d;
+}
+
+/* IMAGEM (placeholder por enquanto) */
+.card-img {
+  width: 100%;
+  height: 180px;
+  background: #bfbfbf;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* BOTÃO */
+.btn-card {
+  background: #1c4d52;
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+/* HOVER */
+.btn-card:hover {
+  background: #163c40;
+}
+
+/* reduz o espaço acima dos cards */
+.projetos {
+  padding-top: 70px;   /* antes estava 60px */
+}
+
+.main-content {
+  padding-top: 0px;
+}
+
+/* ================= LOGO HUB-SE (navbar) ================= */
+.logo-hubse {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-hubse .logo-icone {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: #1c4d52;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.logo-hubse .logo-texto {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #1c2b2d;
+}
+
+/* ================= PÁGINA EQUIPE ================= */
+.equipe {
+  padding: 20px 80px 80px;
+}
+
+.equipe-grupo {
+  margin-bottom: 50px;
+}
+
+.equipe-grupo h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #1c2b2d;
+}
+
+.equipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 40px 30px;
+}
+
+.membro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.membro-foto {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #d9d9d9;
+  margin-bottom: 14px;
+}
+
+.membro-nome {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1c4d52;
+  margin-bottom: 8px;
+}
+
+.membro-links {
+  display: flex;
+  gap: 10px;
+}
+
+.membro-links a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: #1c2b2d;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.icone-rede {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.icone-linkedin {
+  background: #0a66c2;
+}
+
+.icone-github {
+  background: #1c2b2d;
+}
