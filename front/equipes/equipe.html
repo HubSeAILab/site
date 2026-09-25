@@ -10,23 +10,35 @@
 </head>
 <body>
 
-  <nav class="navbar">
+  <!-- NAVBAR -->
+  <header class="navbar">
+
+    <!-- LOGO -->
     <div class="logo">
       <img src="../assets/logos/logoempe.png" alt="HUB-SE" class="empe-logo">
     </div>
 
-    <div class="nav-links">
+    <!-- MENU -->
+    <nav class="nav-links">
       <a href="../index.html">Início</a>
-      <a href="sobre.html">Sobre</a>
+      <a href="../sobre/sobre.html">Sobre</a>
       <a href="../projetos/projetos.html">Projetos</a>
       <a href="equipe.html" class="active">Equipe</a>
+    </nav>
 
+    <!-- BOTÃO -->
     <button class="btn-contato">Contato</button>
-  </nav>
+  </header>
 
   <main class="equipe" id="equipe-container">
     <!-- os grupos e cards são inseridos aqui via JavaScript -->
   </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-overlay"></div>
+
+  </footer>
 
   <script>
     async function carregarEquipe() {

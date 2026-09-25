@@ -1,7 +1,6 @@
 /*O que ainda preciso fazer: 
 - Hover nos botões de parceria que levam para os outros sites
 - Texto do SOBRE ficar mais largo
-- Footer com efeito tecnológico
 - Adicionar o botão de contato na pag SOBRE
 - Colocar a descrição e parcerias
 - Fazer versão pra celular
@@ -33,15 +32,19 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
 }
 
 /* ================= NAVBAR ================= */
 .navbar {
-  position: relative;
+  position: relative; /* ou fixed, se quiser */
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 30px 80px;
+  width: 100%;
 }
 
 /* menu central */
@@ -124,21 +127,35 @@ body {
 
 /* ================= FOOTER ================= */
 .footer {
-  margin-top: auto;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+
   width: 100%;
+  height: 80px; /* mesmo tamanho do footer de referência */
+  z-index: 1000; /* fica por cima de tudo */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   background: #0d3b44;
   color: white;
-
-  padding: 60px 20px;
   text-align: center;
 
   /* efeito tech */
   background-image: url("img/circuit.png");
   background-size: cover;
   background-position: center;
+}
 
-  border-radius: 0;
+/* camada escura por cima do circuito, pra manter o texto legível */
+.footer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 59, 68, 0.75);
+  z-index: 1;
 }
 
 .footer-content {
@@ -146,10 +163,7 @@ body {
   z-index: 2;
 }
 
-.footer {
-  padding: 40px 20px;
-}
-
+/* ================= SOBRE ================= */
 .sobre {
   flex: 1;
 
@@ -175,18 +189,24 @@ body {
   height: 100px;
 }
 
+.sobre h1 {
+  font-size: 36px;
+}
+
 /* layout das colunas */
 .sobre-content {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 450px auto 400px;
+  align-items: start;
+  gap: 30px;
   justify-content: center;
-  gap: 40px;
 }
 
 /* texto */
 .sobre-texto {
-  max-width: 400px;
+  font-size: 20px;
   line-height: 1.6;
+  max-width: 500px;
   max-height: 200px;
 }
 
@@ -199,7 +219,14 @@ body {
 }
 
 /* parcerias */
+.sobre-parcerias {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .sobre-parcerias h3 {
+  margin-top: 0;
   margin-bottom: 15px;
 }
 
@@ -211,97 +238,28 @@ body {
 
 .parcerias-lista span {
   border: 2px solid #1c4d52;
-  padding: 10px 20px;
+  padding: 10px 22px;
   border-radius: 30px;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-}
-
-.main-content {
-  padding-top: 200px;
-}
-
-.navbar {
-  position: relative; /* ou fixed, se quiser */
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 30px 80px;
-
-  width: 100%;
+  font-size: 16px;
 }
 
 #navsobre {
   padding-top: 77px;
 }
 
-/* TEXTO */
-.sobre-texto {
-  font-size: 20px;
-  line-height: 1.6;
-  max-width: 500px;
-}
-
-/* TÍTULO */
-.sobre h1 {
-  font-size: 36px;
-}
-
-/* PARCERIAS (botões) */
-.parcerias-lista span {
-  font-size: 16px;
-  padding: 10px 22px;
+/* ================= MAIN / LAYOUT GERAL ================= */
+.main-content {
+  padding-top: 0px;
 }
 
 main {
-  min-height: calc(100vh - 120px); /* altura da tela - altura do footer */
-  padding-bottom: 100px;
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-
-  width: 100%;
-  height: 80px;
-
-  background: #0f3d3f;
-  color: white;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sobre-parcerias {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.sobre-parcerias h3 {
-  margin-top: 0;
-}
-
-.sobre-content {
-  display: grid;
-  grid-template-columns: 450px auto 400px;
-  align-items: start;
-  gap: 30px;
-
-  justify-content: center;
+  flex: 1;
+  padding-bottom: 100px; /* espaço reservado pro footer fixo (80px) não cobrir o fim do conteúdo */
 }
 
 /* ===== PROJETOS ===== */
-
 .projetos {
-  padding: 60px 80px;
+  padding: 70px 80px 60px;
 }
 
 /* GRID */
@@ -355,15 +313,6 @@ footer {
 /* HOVER */
 .btn-card:hover {
   background: #163c40;
-}
-
-/* reduz o espaço acima dos cards */
-.projetos {
-  padding-top: 70px;   /* antes estava 60px */
-}
-
-.main-content {
-  padding-top: 0px;
 }
 
 /* ================= LOGO HUB-SE (navbar) ================= */
@@ -428,6 +377,7 @@ footer {
   object-fit: cover;
   background: #d9d9d9;
   margin-bottom: 14px;
+  border: 4px solid #0d3b44;
 }
 
 .membro-nome {
