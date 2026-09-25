@@ -1,0 +1,117 @@
+name: Validar e publicar projetos
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  validate-and-publish:
+    # O GITHUB_TOKEN não consegue fazer push na branch de uma PR de fork.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+
+    runs-on: ubuntu-latest
+
+    env:
+      BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      PR_BRANCH: ${{ github.head_ref }}
+      MAIN_FILE: front/projetos/projetos.json
+
+    steps:
+      - name: Checkout da branch da PR
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validar, processar e publicar JSONs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mapfile -d '' publication_files < <(
+            git diff \
+              --name-only \
+              -z \
+              --diff-filter=A \
+              "$BASE_SHA" \
+              "$HEAD_SHA" \
+              -- 'front/projetos/publicacoes/'
+          )
+
+          if [ "${#publication_files[@]}" -eq 0 ]; then
+            echo "Nenhuma publicação nova encontrada."
+            exit 0
+          fi
+
+          echo "Validando o arquivo principal atual..."
+          npx --yes ajv-cli@5.0.0 validate \
+            -s schemas/projects.schema.json \
+            -d "$MAIN_FILE" \
+            --all-errors \
+            --spec=draft2020
+
+          for file in "${publication_files[@]}"; do
+            echo "Validando publicação de entrada: $file"
+
+            npx --yes prettier@3.5.3 --check "$file"
+
+            npx --yes ajv-cli@5.0.0 validate \
+              -s schemas/publication-input.schema.json \
+              -d "$file" \
+              --all-errors \
+              --spec=draft2020
+          done
+
+          for file in "${publication_files[@]}"; do
+            echo "Processando publicação: $file"
+
+            node scripts/process-publication.mjs \
+              "$file" \
+              "$MAIN_FILE"
+          done
+
+          echo "Formatando arquivos gerados..."
+          npx --yes prettier@3.5.3 --write \
+            "${publication_files[@]}" \
+            "$MAIN_FILE"
+
+          for file in "${publication_files[@]}"; do
+            echo "Validando publicação final: $file"
+
+            npx --yes ajv-cli@5.0.0 validate \
+              -s schemas/publication-final.schema.json \
+              -d "$file" \
+              --all-errors \
+              --spec=draft2020
+          done
+
+          echo "Validando o arquivo principal final..."
+          npx --yes ajv-cli@5.0.0 validate \
+            -s schemas/projects.schema.json \
+            -d "$MAIN_FILE" \
+            --all-errors \
+            --spec=draft2020
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -- \
+            "${publication_files[@]}" \
+            "$MAIN_FILE"
+
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração para commit."
+            exit 0
+          fi
+
+          git commit -m "chore: adicionar nova publicação"
+          git push origin "HEAD:${PR_BRANCH}"
