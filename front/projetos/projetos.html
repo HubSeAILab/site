@@ -6,12 +6,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Estilos específicos dos cards de projeto (mantém compatibilidade com styles.css) -->
+  <style>
+    .card-projeto {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-desc {
+      flex-grow: 1;
+      margin: 0.5rem 0 1rem;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      color: #333;
+    }
+
+    .btn-card {
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+      background-color: #0a2540; /* azul escuro */
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      padding: 0.6rem 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn-card:hover {
+      background-color: #06192e;
+    }
+  </style>
 </head>
 <body>
 
   <!-- NAVBAR -->
   <header class="navbar">
-    
+
     <!-- LOGO -->
     <div class="logo">
       <img src="assets/logos/logoempe.png" alt="HUB-SE" class="empe-logo">
@@ -34,40 +75,9 @@
 
     <section class="projetos">
 
-      <!-- GRID DE CARDS -->
-      <div class="projetos-grid">
-
-        <!-- CARD 1 -->
-        <div class="card-projeto">
-          <h3>Título aqui</h3>
-
-          <div class="card-img">
-            <!-- placeholder -->
-          </div>
-
-          <button class="btn-card">Saiba mais</button>
-        </div>
-
-        <!-- CARD 2 -->
-        <div class="card-projeto">
-          <h3>Título aqui</h3>
-
-          <div class="card-img">
-          </div>
-
-          <button class="btn-card">Saiba mais</button>
-        </div>
-
-        <!-- CARD 3 -->
-        <div class="card-projeto">
-          <h3>Título aqui</h3>
-
-          <div class="card-img">
-          </div>
-
-          <button class="btn-card">Saiba mais</button>
-        </div>
-
+      <!-- GRID DE CARDS (preenchido via JS a partir de projetos.json) -->
+      <div class="projetos-grid" id="projetos-grid">
+        <!-- os cards são inseridos aqui dinamicamente -->
       </div>
 
     </section>
@@ -82,6 +92,41 @@
       <p>© 2026 HUB-SE</p>
     </div>
   </footer>
+
+  <script>
+    async function carregarProjetos() {
+      const grid = document.getElementById('projetos-grid');
+
+      try {
+        const resposta = await fetch('projetos.json');
+        const dados = await resposta.json();
+
+        dados.projetos.forEach(projeto => {
+          const card = document.createElement('div');
+          card.className = 'card-projeto';
+
+          card.innerHTML = `
+            <h3>${projeto.nome}</h3>
+
+            <div class="card-img">
+              <img src="${projeto.foto}" alt="${projeto.nome}">
+            </div>
+
+            <p class="card-desc">${projeto.descricao}</p>
+
+            <a class="btn-card" href="${projeto.link}" target="_blank" rel="noopener noreferrer">Saiba mais</a>
+          `;
+
+          grid.appendChild(card);
+        });
+      } catch (erro) {
+        grid.innerHTML = '<p>Não foi possível carregar os projetos no momento.</p>';
+        console.error('Erro ao carregar projetos.json:', erro);
+      }
+    }
+
+    carregarProjetos();
+  </script>
 
 </body>
 </html>

@@ -1,0 +1,34 @@
+{
+  "projetos": [
+    {
+      "nome": "SlanGO",
+      "foto": "https://exemplo.com/fotos/slango.png",
+      "descricao": "Aplicativo mobile estilo Duolingo para aprender gírias brasileiras.",
+      "link": "https://github.com/usuario/slango"
+    },
+    {
+      "nome": "Análise de Gírias no YouTube",
+      "foto": "https://exemplo.com/fotos/gamer-slang.png",
+      "descricao": "Pesquisa de iniciação científica sobre gírias de jogos em comentários do YouTube.",
+      "link": "https://github.com/usuario/analise-girias-youtube"
+    },
+    {
+      "nome": "Sistema de Gestão de Biblioteca",
+      "foto": "https://exemplo.com/fotos/biblioteca.png",
+      "descricao": "Sistema web para controle de empréstimos e acervo de uma biblioteca.",
+      "link": "https://github.com/usuario/gestao-biblioteca"
+    },
+    {
+      "nome": "Compressor de Arquivos Personalizado",
+      "foto": "https://exemplo.com/fotos/compressor.png",
+      "descricao": "Implementação de algoritmo de compressão de dados para fins de estudo.",
+      "link": "https://github.com/usuario/compressor-arquivos"
+    },
+    {
+      "nome": "Simulador de Arquitetura de Computadores",
+      "foto": "https://exemplo.com/fotos/simulador-cpu.png",
+      "descricao": "Ferramenta educacional que simula o funcionamento de uma CPU simplificada.",
+      "link": "https://github.com/usuario/simulador-cpu"
+    }
+  ]
+}
