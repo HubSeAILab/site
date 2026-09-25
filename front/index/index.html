@@ -2,45 +2,114 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>HUB-SE</title>
+  <title>HUB-SE | Início</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="stylesheet" href="styles.css">
+  
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
   <!-- NAVBAR -->
   <header class="navbar">
-    
-    <!-- LOGO -->
     <div class="logo">
       <img src="assets/logos/logoempe.png" alt="HUB-SE" class="empe-logo">
     </div>
 
-    <!-- MENU -->
     <nav class="nav-links">
       <a href="index.html" class="active">Início</a>
-      <a href="sobre.html">Sobre</a>
+      <a href="sobre/sobre.html">Sobre</a>
       <a href="projetos/projetos.html">Projetos</a>
       <a href="equipes/equipe.html">Equipe</a>
     </nav>
 
-    <!-- BOTÃO -->
     <button class="btn-contato">Contato</button>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <img src="assets/logos/logodeitada.png" alt="HUB-SE" class="hero-logo">
-  </section>
+  <!-- CORPO PRINCIPAL -->
+  <main>
+    <!-- HERO (Logo Grande) -->
+    <section class="hero">
+      <img src="assets/logos/logodeitada.png" alt="HUB-SE" class="hero-logo">
+    </section>
 
+    <!-- CARROSSEL / NOTÍCIAS -->
+    <section class="noticias-section">
+      <!-- Fallback -->
+      <div id="fallback-vazio" class="fallback-vazio">
+        <img src="assets/logos/logodeitada.png" alt="Sem notícias">
+      </div>
+
+      <!-- Container das Notícias -->
+      <div id="noticias-container" class="noticias-container">
+        <!-- JS injeta os cards aqui -->
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
   <footer class="footer">
-  <div class="footer-overlay"></div>
+    <div class="footer-overlay"></div>
+    <div class="footer-content">
+      <p>© 2026 HUB-SE</p>
+    </div>
+  </footer>
 
-  <div class="footer-content">
-    <p>© 2026 HUB-SE</p>
-  </div>
-</footer>
+  <!-- SCRIPT -->
+  <script>
+    async function carregarNoticias() {
+      const container = document.getElementById('noticias-container');
+      const fallback = document.getElementById('fallback-vazio');
 
+      try {
+        const resposta = await fetch('noticias.json');
+        const todasNoticias = await resposta.json();
+
+        const hoje = new Date();
+        let noticiasValidas = todasNoticias.filter(noticia => {
+          const vencimento = new Date(noticia.data_vencimento);
+          return vencimento >= hoje;
+        });
+
+        if (noticiasValidas.length === 0) {
+          container.style.display = 'none';
+          fallback.style.display = 'block';
+          return;
+        }
+
+        noticiasValidas.sort((a, b) => new Date(b.data_lancamento) - new Date(a.data_lancamento));
+
+        if (noticiasValidas.length <= 4) {
+          container.className = 'noticias-container noticias-estaticas';
+        } else {
+          container.className = 'noticias-container noticias-carrossel';
+          noticiasValidas = [...noticiasValidas, ...noticiasValidas];
+        }
+
+        fallback.style.display = 'none';
+        container.style.display = 'flex';
+
+        noticiasValidas.forEach(noticia => {
+          const card = document.createElement('a');
+          card.href = noticia.link;
+          card.className = 'noticia-card';
+          card.innerHTML = `
+            <img src="${noticia.imagem}" alt="${noticia.titulo}" class="noticia-img">
+            <div class="noticia-conteudo">
+              <h3 class="noticia-titulo">${noticia.titulo}</h3>
+              <p class="noticia-descricao">${noticia.descricao}</p>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+
+      } catch (erro) {
+        console.error("Erro ao carregar notícias:", erro);
+        container.style.display = 'none';
+        fallback.style.display = 'block';
+      }
+    }
+
+    carregarNoticias();
+  </script>
 </body>
 </html>

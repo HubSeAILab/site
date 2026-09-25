@@ -1,0 +1,26 @@
+[
+  {
+    "titulo": "Projeto SlanGO lançado",
+    "descricao": "Novo aplicativo desenvolvido com Flutter e Node.js para gírias.",
+    "imagem": "assets/logos/logodeitada.png",
+    "link": "projetos/projetos.html",
+    "data_lancamento": "2026-09-20T00:00:00",
+    "data_vencimento": "2026-12-31T00:00:00"
+  },
+  {
+    "titulo": "Workshop GitHub Copilot",
+    "descricao": "Aprenda a usar IA no desenvolvimento de software de forma prática.",
+    "imagem": "assets/logos/logoempe.png",
+    "link": "sobre.html",
+    "data_lancamento": "2026-09-22T00:00:00",
+    "data_vencimento": "2026-11-30T00:00:00"
+  },
+  {
+    "titulo": "Notícia Vencida (Teste)",
+    "descricao": "Como a data já passou, o JavaScript vai cortar essa notícia.",
+    "imagem": "assets/logos/logodeitada.png",
+    "link": "#",
+    "data_lancamento": "2026-01-01T00:00:00",
+    "data_vencimento": "2026-02-01T00:00:00"
+  }
+]
