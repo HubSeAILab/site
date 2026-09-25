@@ -4,19 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Equipe - HUB-SE</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="equipe.css">
 </head>
 <body>
 
   <nav class="navbar">
-    <div class="logo">
-      <img src="assets/logos/logoempe.png" alt="HUB-SE" class="empe-logo">
+    <div class="logo-hubse">
+      <div class="logo-icone">H</div>
+      <div class="logo-texto">HUB<br>-SE</div>
     </div>
 
     <div class="nav-links">
-      <a href="index.html">Início</a>
+      <a href="../index.html">Início</a>
       <a href="sobre.html">Sobre</a>
-      <a href="projetos.html">Projetos</a>
+      <a href="../projetos/projetos.html">Projetos</a>
       <a href="equipe.html" class="active">Equipe</a>
     </div>
 
@@ -27,88 +28,13 @@
     <!-- os grupos e cards são inseridos aqui via JavaScript -->
   </main>
 
-  <!--
-    Dados da equipe embutidos aqui dentro para a página funcionar mesmo
-    abrindo o arquivo direto no navegador (duplo clique), sem precisar
-    de servidor local. Se um dia você subir isso num servidor de verdade,
-    pode trocar esse bloco por um fetch('equipe.json') normal.
-  -->
-  <script type="application/json" id="dados-equipe">
-[
-  {
-    "NOME": "Ana",
-    "SOBRENOME": "Ferreira",
-    "PROJETO": "Organizadores",
-    "LINKEDIN": "https://linkedin.com/in/ana-ferreira",
-    "GITHUB": "https://github.com/anaferreira",
-    "URL_FOTO": "https://i.pravatar.cc/300?img=47"
-  },
-  {
-    "NOME": "Camila",
-    "SOBRENOME": "Rocha",
-    "PROJETO": "Organizadores",
-    "LINKEDIN": "https://linkedin.com/in/camila-rocha",
-    "GITHUB": "https://github.com/camilarocha",
-    "URL_FOTO": "https://i.pravatar.cc/300?img=44"
-  },
-  {
-    "NOME": "Rafael",
-    "SOBRENOME": "Almeida",
-    "PROJETO": "Organizadores",
-    "LINKEDIN": "https://linkedin.com/in/rafael-almeida",
-    "GITHUB": "https://github.com/rafaelalmeida",
-    "URL_FOTO": "https://i.pravatar.cc/300?img=12"
-  },
-  {
-    "NOME": "Lucas",
-    "SOBRENOME": "Martins",
-    "PROJETO": "Organizadores",
-    "LINKEDIN": "https://linkedin.com/in/lucas-martins",
-    "GITHUB": "https://github.com/lucasmartins",
-    "URL_FOTO": "https://i.pravatar.cc/300?img=13"
-  },
-  {
-    "NOME": "Eduardo",
-    "SOBRENOME": "Nogueira",
-    "PROJETO": "Projeto X",
-    "LINKEDIN": "https://linkedin.com/in/eduardo-nogueira",
-    "GITHUB": "https://github.com/eduardonogueira",
-    "URL_FOTO": "https://i.pravatar.cc/300?img=53"
-  },
-  {
-    "NOME": "Fatima",
-    "SOBRENOME": "Hassan",
-    "PROJETO": "Projeto X",
-    "LINKEDIN": "https://linkedin.com/in/fatima-hassan",
-    "GITHUB": "https://github.com/fatimahassan",
-    "URL_FOTO": "https://i.pravatar.cc/300?img=32"
-  },
-  {
-    "NOME": "Igor",
-    "SOBRENOME": "Barbosa",
-    "PROJETO": "Projeto X",
-    "LINKEDIN": "https://linkedin.com/in/igor-barbosa",
-    "GITHUB": "https://github.com/igorbarbosa",
-    "URL_FOTO": "https://i.pravatar.cc/300?img=15"
-  },
-  {
-    "NOME": "Juliana",
-    "SOBRENOME": "Castro",
-    "PROJETO": "Projeto X",
-    "LINKEDIN": "https://linkedin.com/in/juliana-castro",
-    "GITHUB": "https://github.com/julianacastro",
-    "URL_FOTO": "https://i.pravatar.cc/300?img=48"
-  }
-]
-  </script>
-
   <script>
-    function carregarEquipe() {
+    async function carregarEquipe() {
       const container = document.getElementById('equipe-container');
 
       try {
-        const dadosBrutos = document.getElementById('dados-equipe').textContent;
-        const membros = JSON.parse(dadosBrutos);
+        const resposta = await fetch('equipe.json');
+        const membros = await resposta.json();
 
         // agrupa os membros pelo campo PROJETO, mantendo a ordem de chegada
         const grupos = {};
@@ -140,7 +66,7 @@
 
       } catch (erro) {
         container.innerHTML = '<p>Não foi possível carregar os dados da equipe.</p>';
-        console.error('Erro ao carregar os dados da equipe:', erro);
+        console.error('Erro ao carregar equipe.json:', erro);
       }
     }
 
