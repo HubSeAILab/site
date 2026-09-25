@@ -1,0 +1,54 @@
+{
+  "title": "Arquivo principal de projetos",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["projetos"],
+  "properties": {
+    "projetos": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["nome", "foto", "descricao", "link"],
+            "properties": {
+              "nome": { "type": "string", "minLength": 1 },
+              "foto": { "type": "string", "minLength": 1 },
+              "descricao": { "type": "string", "minLength": 1 },
+              "link": { "type": "string", "minLength": 1 }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "image",
+              "description",
+              "title",
+              "start_date",
+              "end_date"
+            ],
+            "properties": {
+              "image": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^(https?://.+|.+\\.(png|jpg|jpeg|PNG|JPG|JPEG))$"
+              },
+              "description": { "type": "string", "minLength": 1 },
+              "title": { "type": "string", "minLength": 1 },
+              "start_date": {
+                "type": "string",
+                "pattern": "^\\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01])$"
+              },
+              "end_date": {
+                "type": "string",
+                "pattern": "^\\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01])$"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

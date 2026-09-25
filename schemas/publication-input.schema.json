@@ -1,0 +1,34 @@
+{
+  "title": "Publicação de projeto antes do processamento",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "image",
+    "description",
+    "title",
+    "start_date"
+  ],
+  "properties": {
+    "image": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(https?://.+|.+\\.(png|jpg|jpeg|PNG|JPG|JPEG))$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "start_date": {
+      "type": "string",
+      "pattern": "^\\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01])$"
+    },
+    "end_date": {
+      "type": "string",
+      "pattern": "^\\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01])$"
+    }
+  }
+}
