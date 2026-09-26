@@ -2,25 +2,49 @@
   {
     "titulo": "Projeto SlanGO lançado",
     "descricao": "Novo aplicativo desenvolvido com Flutter e Node.js para gírias.",
-    "imagem": "assets/logos/logodeitada.png",
-    "link": "projetos/projetos.html",
+    "imagem": "../assets/logos/logodeitada.png",
+    "link": "../projetos/projetos.html",
     "data_lancamento": "2026-09-20T00:00:00",
     "data_vencimento": "2026-12-31T00:00:00"
   },
   {
     "titulo": "Workshop GitHub Copilot",
     "descricao": "Aprenda a usar IA no desenvolvimento de software de forma prática.",
-    "imagem": "assets/logos/logoempe.png",
-    "link": "sobre.html",
-    "data_lancamento": "2026-09-22T00:00:00",
-    "data_vencimento": "2026-11-30T00:00:00"
+    "imagem": "../assets/logos/logoempe.png",
+    "link": "../sobre/sobre.html",
+    "data_lancamento": "2026-09-21T00:00:00",
+    "data_vencimento": "2026-12-31T00:00:00"
   },
   {
-    "titulo": "Notícia Vencida (Teste)",
-    "descricao": "Como a data já passou, o JavaScript vai cortar essa notícia.",
-    "imagem": "assets/logos/logodeitada.png",
-    "link": "#",
-    "data_lancamento": "2026-01-01T00:00:00",
-    "data_vencimento": "2026-02-01T00:00:00"
+    "titulo": "Inovação no Ensino",
+    "descricao": "Novos métodos de aprendizagem aplicados em Engenharia de Software.",
+    "imagem": "../assets/logos/logodeitada.png",
+    "link": "../index.html",
+    "data_lancamento": "2026-09-22T00:00:00",
+    "data_vencimento": "2026-12-31T00:00:00"
+  },
+  {
+    "titulo": "Nova Parceria",
+    "descricao": "O laboratório HUB-SE firma parceria para novos projetos de IA.",
+    "imagem": "../assets/logos/logoempe.png",
+    "link": "../sobre/sobre.html",
+    "data_lancamento": "2026-09-23T00:00:00",
+    "data_vencimento": "2026-12-31T00:00:00"
+  },
+  {
+    "titulo": "Apresentação de Artigos",
+    "descricao": "Alunos apresentam trabalhos de modelagem de comportamento humano.",
+    "imagem": "../assets/logos/logodeitada.png",
+    "link": "../equipes/equipe.html",
+    "data_lancamento": "2026-09-24T00:00:00",
+    "data_vencimento": "2026-12-31T00:00:00"
+  },
+  {
+    "titulo": "Vagas Abertas",
+    "descricao": "Processo seletivo aberto para novos investigadores no laboratório.",
+    "imagem": "../assets/logos/logoempe.png",
+    "link": "../index.html",
+    "data_lancamento": "2026-09-25T00:00:00",
+    "data_vencimento": "2026-12-31T00:00:00"
   }
 ]
