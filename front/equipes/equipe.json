@@ -32,20 +32,12 @@
     "URL_FOTO": "https://i.pravatar.cc/300?img=13"
   },
   {
-    "NOME": "Eduardo",
-    "SOBRENOME": "Nogueira",
+    "NOME": "Igor",
+    "SOBRENOME": "Barbosa",
     "PROJETO": "Projeto X",
-    "LINKEDIN": "https://linkedin.com/in/eduardo-nogueira",
-    "GITHUB": "https://github.com/eduardonogueira",
-    "URL_FOTO": "https://i.pravatar.cc/300?img=53"
-  },
-  {
-    "NOME": "Fatima",
-    "SOBRENOME": "Hassan",
-    "PROJETO": "Projeto X",
-    "LINKEDIN": "https://linkedin.com/in/fatima-hassan",
-    "GITHUB": "https://github.com/fatimahassan",
-    "URL_FOTO": "https://i.pravatar.cc/300?img=32"
+    "LINKEDIN": "https://linkedin.com/in/igor-barbosa",
+    "GITHUB": "https://github.com/igorbarbosa",
+    "URL_FOTO": "https://i.pravatar.cc/300?img=15"
   },
   {
     "NOME": "Igor",
@@ -56,11 +48,35 @@
     "URL_FOTO": "https://i.pravatar.cc/300?img=15"
   },
   {
-    "NOME": "Juliana",
-    "SOBRENOME": "Castro",
-    "PROJETO": "Projeto X",
-    "LINKEDIN": "https://linkedin.com/in/juliana-castro",
-    "GITHUB": "https://github.com/julianacastro",
-    "URL_FOTO": "https://i.pravatar.cc/300?img=48"
+    "NOME": "Igor",
+    "SOBRENOME": "Barbosa",
+    "PROJETO": "Projeto Y",
+    "LINKEDIN": "https://linkedin.com/in/igor-barbosa",
+    "GITHUB": "https://github.com/igorbarbosa",
+    "URL_FOTO": "https://i.pravatar.cc/300?img=15"
+  },
+  {
+    "NOME": "Igor",
+    "SOBRENOME": "Barbosa",
+    "PROJETO": "Projeto Z",
+    "LINKEDIN": "https://linkedin.com/in/igor-barbosa",
+    "GITHUB": "https://github.com/igorbarbosa",
+    "URL_FOTO": "https://i.pravatar.cc/300?img=15"
+  },
+  {
+    "NOME": "Igor",
+    "SOBRENOME": "Barbosa",
+    "PROJETO": "PZ",
+    "LINKEDIN": "https://linkedin.com/in/igor-barbosa",
+    "GITHUB": "https://github.com/igorbarbosa",
+    "URL_FOTO": "https://i.pravatar.cc/300?img=15"
+  },
+  {
+    "NOME": "Igor",
+    "SOBRENOME": "Barbosa",
+    "PROJETO": "PZZ",
+    "LINKEDIN": "https://linkedin.com/in/igor-barbosa",
+    "GITHUB": "https://github.com/igorbarbosa",
+    "URL_FOTO": "https://i.pravatar.cc/300?img=15"
   }
 ]

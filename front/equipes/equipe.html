@@ -1,18 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Equipe - HUB-SE</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipe - HUB-SE</title>
 
-<link rel="stylesheet" href="equipe.css">
+  <link rel="stylesheet" href="equipe.css">
+  
+  <style>
+    /* Estilos adicionais para organizar os projetos na mesma linha */
+    .equipe-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+    
+    .equipe-row > .equipe-grupo {
+      /* flex-grow é definido dinamicamente via JS, proporcional ao nº de membros */
+      flex: 0 1 auto;
+      margin-bottom: 0;
+    }
+
+    .equipe-row > .equipe-grupo .equipe-grid {
+      flex-wrap: nowrap; /* impede que os cards quebrem dentro do próprio grupo */
+    }
+
+    /* Em telas pequenas, empilha os grupos e libera a quebra dos cards */
+    @media (max-width: 700px) {
+      .equipe-row {
+        flex-direction: column;
+      }
+      .equipe-row > .equipe-grupo {
+        flex: 1 1 auto;
+        width: 100%;
+      }
+      .equipe-row > .equipe-grupo .equipe-grid {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
 
 </head>
 <body>
 
   <!-- NAVBAR -->
   <header class="navbar">
-
     <!-- LOGO -->
     <div class="logo">
       <img src="../assets/logos/logoempe.png" alt="HUB-SE" class="empe-logo">
@@ -37,7 +71,6 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-overlay"></div>
-
   </footer>
 
   <script>
@@ -48,32 +81,101 @@
         const resposta = await fetch('equipe.json');
         const membros = await resposta.json();
 
-        // agrupa os membros pelo campo PROJETO, mantendo a ordem de chegada
-        const grupos = {};
+        // 1. Agrupa os membros pelo campo PROJETO
+        const gruposObj = {};
         membros.forEach(membro => {
-          if (!grupos[membro.PROJETO]) {
-            grupos[membro.PROJETO] = [];
+          if (!gruposObj[membro.PROJETO]) {
+            gruposObj[membro.PROJETO] = [];
           }
-          grupos[membro.PROJETO].push(membro);
+          gruposObj[membro.PROJETO].push(membro);
         });
 
-        Object.entries(grupos).forEach(([nomeGrupo, membrosDoGrupo]) => {
-          const secao = document.createElement('section');
-          secao.className = 'equipe-grupo';
+        // Transforma o objeto em um array para facilitar ordenações
+        const gruposArray = Object.keys(gruposObj).map(nomeProjeto => {
+          return {
+            nome: nomeProjeto,
+            membros: gruposObj[nomeProjeto]
+          };
+        });
 
-          const titulo = document.createElement('h2');
-          titulo.textContent = nomeGrupo;
-          secao.appendChild(titulo);
+        // 2. Ordena os membros de cada projeto por ordem alfabética (Nome + Sobrenome)
+        gruposArray.forEach(grupo => {
+          grupo.membros.sort((a, b) => {
+            const nomeCompletoA = `${a.NOME} ${a.SOBRENOME}`.toLowerCase();
+            const nomeCompletoB = `${b.NOME} ${b.SOBRENOME}`.toLowerCase();
+            return nomeCompletoA.localeCompare(nomeCompletoB, 'pt-BR');
+          });
+        });
 
-          const grid = document.createElement('div');
-          grid.className = 'equipe-grid';
+        // 3. Ordena os projetos: Coordenador primeiro, resto em ordem alfabética
+        gruposArray.sort((a, b) => {
+          if (a.nome === "Coordenador" && b.nome !== "Coordenador") return -1;
+          if (b.nome === "Coordenador" && a.nome !== "Coordenador") return 1;
+          return a.nome.localeCompare(b.nome, 'pt-BR');
+        });
 
-          membrosDoGrupo.forEach(membro => {
-            grid.appendChild(criarCardMembro(membro));
+        // 4. Lógica para mesclar projetos na mesma linha (até 6 pessoas por linha, sem dividir projetos)
+        const MAX_POR_LINHA = 6;
+        const linhasDeProjetos = [];
+        let linhaAtual = [];
+        let qtdPessoasNaLinha = 0;
+
+        gruposArray.forEach(grupo => {
+          const numPessoas = grupo.membros.length;
+
+          // Se a linha estiver vazia ou se adicionar o projeto não estourar o limite de <= 6
+          if (linhaAtual.length === 0) {
+            linhaAtual.push(grupo);
+            qtdPessoasNaLinha = numPessoas;
+          } else if (qtdPessoasNaLinha + numPessoas <= MAX_POR_LINHA) {
+            linhaAtual.push(grupo);
+            qtdPessoasNaLinha += numPessoas;
+          } else {
+            // Fecha a linha atual e cria uma nova
+            linhasDeProjetos.push(linhaAtual);
+            linhaAtual = [grupo];
+            qtdPessoasNaLinha = numPessoas;
+          }
+        });
+        
+        // Empurra a última linha caso não esteja vazia
+        if (linhaAtual.length > 0) {
+          linhasDeProjetos.push(linhaAtual);
+        }
+
+        // 5. Renderização
+        linhasDeProjetos.forEach(linha => {
+          // Cria o container para a "linha" de projetos
+          const divLinha = document.createElement('div');
+          divLinha.className = 'equipe-row';
+
+          // Itera sobre os projetos daquela linha
+          linha.forEach(grupo => {
+            const secao = document.createElement('section');
+            secao.className = 'equipe-grupo';
+            // A largura do grupo é proporcional ao nº de membros,
+            // assim um grupo com 4 pessoas ganha 4x mais espaço que um com 1.
+            secao.style.flexGrow = grupo.membros.length;
+            secao.style.flexBasis = '0';
+
+            const titulo = document.createElement('h2');
+            titulo.textContent = grupo.nome;
+            secao.appendChild(titulo);
+
+            const grid = document.createElement('div');
+            grid.className = 'equipe-grid';
+
+            // Cria e insere os cards das pessoas
+            grupo.membros.forEach(membro => {
+              grid.appendChild(criarCardMembro(membro));
+            });
+
+            secao.appendChild(grid);
+            divLinha.appendChild(secao);
           });
 
-          secao.appendChild(grid);
-          container.appendChild(secao);
+          // Insere a linha montada no DOM
+          container.appendChild(divLinha);
         });
 
       } catch (erro) {
@@ -86,6 +188,7 @@
       const card = document.createElement('div');
       card.className = 'membro';
 
+      // Verifica propriedades vazias para não gerar links quebrados e ajusta a exibição
       card.innerHTML = `
         <img class="membro-foto" src="${membro.URL_FOTO}" alt="${membro.NOME} ${membro.SOBRENOME}">
         <div class="membro-nome">${membro.NOME} ${membro.SOBRENOME}</div>
